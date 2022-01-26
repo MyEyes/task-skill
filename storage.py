@@ -29,7 +29,8 @@ class DatabaseStorage:
         logging.info("Initializing database")
         try:
             self.cursor.execute("CREATE TABLE IF NOT EXISTS task_meta(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(60) NOT NULL, value VARCHAR(60), UNIQUE(name))")
-            self.cursor.execute("INSERT INTO task_meta (name, value) VALUES (\"VERSION\",%s)", ((self.ver.public)))
+            data = ("Version", self.ver.public)
+            self.cursor.execute("INSERT INTO task_meta (name, value) VALUES (%s,%s)", data)
             self.db.commit()
         except Exception as e:
             raise e
