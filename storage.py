@@ -1,6 +1,6 @@
 import logging
 from distutils.log import Log
-from mysql.connector import connect
+from mysql.connector import connect, Error
 from mysql.connector.errors import ProgrammingError
 from packaging import version
 
@@ -18,7 +18,7 @@ class DatabaseStorage:
                 data = resp.fetchall()
                 if len(data) == 0:
                     self.__initDB()
-            except mysql.connector.Error:
+            except Error:
                 self.__initDB()
         except Exception as e:
             raise e
