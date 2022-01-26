@@ -47,5 +47,5 @@ class Schema_v_0_0_1():
 
     def set_data(self, db):
         cursor = db.cursor()
-        data = ("Version", self.ver.public)
+        data = ("Version", "0.0.1")
         cursor.execute("INSERT INTO task_meta (name, value) VALUES (%s,%s)", data)
