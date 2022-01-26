@@ -1,4 +1,4 @@
-from v_0_0_1 import Schema_v_0_0_1
+from .v_0_0_1 import Schema_v_0_0_1
 class Schema:
     def __init__(self) -> None:
         self.versions = {
