@@ -18,7 +18,7 @@ class DatabaseStorage:
                 data = resp.fetchall()
                 if len(data) == 0:
                     self.__initDB()
-            except ProgrammingError:
+            except mysql.connector.Error:
                 self.__initDB()
         except Exception as e:
             raise e
