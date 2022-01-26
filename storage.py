@@ -15,11 +15,16 @@ class DatabaseStorage:
         try:
             try:
                 resp = self.cursor.execute("SELECT value FROM task_meta WHERE name = \"Version\"")
+                if not resp:
+                    self.__initDB()
+                    return
                 data = resp.fetchall()
                 if len(data) == 0:
                     self.__initDB()
+                    return
             except Error:
                 self.__initDB()
+                return
         except Exception as e:
             raise e
 
