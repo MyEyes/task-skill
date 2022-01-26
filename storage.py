@@ -3,6 +3,7 @@ from distutils.log import Log
 from mysql.connector import connect, Error
 from mysql.connector.errors import ProgrammingError
 from packaging import version
+from .schema import Schema
 
 class DatabaseStorage:
     def __init__(self, dbhost, dbname, dbuser, dbpass):
@@ -28,9 +29,9 @@ class DatabaseStorage:
     def __initDB(self):
         logging.info("Initializing database")
         try:
-            self.cursor.execute("CREATE TABLE IF NOT EXISTS task_meta(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(60) NOT NULL, value VARCHAR(60), UNIQUE(name))")
-            data = ("Version", self.ver.public)
-            self.cursor.execute("INSERT INTO task_meta (name, value) VALUES (%s,%s)", data)
+            schema = Schema()
+            schema.create_schema(self.db)
+            schema.set_data(self.db)
             self.db.commit()
         except Exception as e:
             raise e
