@@ -1,7 +1,6 @@
 import logging
-from . import Schema
 
-class Schema_v_0_0_1(Schema):
+class Schema_v_0_0_1():
     def __init__(self):
         pass
 
