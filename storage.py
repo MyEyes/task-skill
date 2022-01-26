@@ -1,3 +1,4 @@
+import logging
 from distutils.log import Log
 from mysql.connector import connect
 from mysql.connector.errors import ProgrammingError
@@ -23,7 +24,7 @@ class DatabaseStorage:
             raise e
 
     def __initDB(self):
-        Log.info("Initializing database")
+        logging.info("Initializing database")
         try:
             self.cursor.execute("CREATE TABLE task_meta id INT AUTO_INCREMENT PRIMARY KEY, name UNIQUE VARCHAR(60) NOT NULL, value VARCHAR(60)")
             self.cursor.execute("INSERT INTO task_meta (name, value) VALUES (\"VERSION\",%s)", (self.ver.Version()))

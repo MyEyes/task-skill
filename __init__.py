@@ -22,7 +22,7 @@ class taskSkill(MycroftSkill):
         try:
             self.__initStorage()
         except Exception as e:
-            LOG.error(e)
+            logging.error(traceback.format_exc())
             self.storage = None
 
     def __initStorage(self):
