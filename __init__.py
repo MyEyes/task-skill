@@ -19,7 +19,11 @@ __author__ = "MyEyes"
 class taskSkill(MycroftSkill):
     def __init__(self) -> None:
         super(taskSkill, self).__init__(name="taskSkill")
-        self.__initStorage()
+        try:
+            self.__initStorage()
+        except Exception as e:
+            self.speak_dialog("init_storage_err")
+            self.storage = None
 
     def __initStorage(self):
         if self.settings.get('store_mode') == "database":
