@@ -1,5 +1,6 @@
 from distutils.log import Log
 from mysql.connector import connect
+from mysql.connector.errors import ProgrammingError
 from packaging import version
 
 class DatabaseStorage:
@@ -11,9 +12,12 @@ class DatabaseStorage:
 
     def __checkDBInit(self):
         try:
-            resp = self.cursor.execute("SELECT value FROM task_meta WHERE name = \"Version\"")
-            data = resp.fetchall()
-            if len(data) == 0:
+            try:
+                resp = self.cursor.execute("SELECT value FROM task_meta WHERE name = \"Version\"")
+                data = resp.fetchall()
+                if len(data) == 0:
+                    self.__initDB()
+            except ProgrammingError:
                 self.__initDB()
         except Exception as e:
             raise e

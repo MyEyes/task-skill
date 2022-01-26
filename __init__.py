@@ -22,7 +22,7 @@ class taskSkill(MycroftSkill):
         try:
             self.__initStorage()
         except Exception as e:
-            self.speak_dialog("init_storage_err")
+            LOG.error(e)
             self.storage = None
 
     def __initStorage(self):
