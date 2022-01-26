@@ -7,6 +7,7 @@ class DatabaseStorage:
         self.ver = version.parse("0.0.1")
         self.db = connect(host=dbhost,user=dbuser,password=dbpass,database=dbname)
         self.cursor = self.db.cursor()
+        self.__checkDBInit()
 
     def __checkDBInit(self):
         try:
